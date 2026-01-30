@@ -1,0 +1,58 @@
+{
+  "description": "Hooks for glootie GitHub Copilot CLI extension",
+  "hooks": {
+    "tool:invoke": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${GLOOTIE_ROOT}/pre-tool-use-hook.js",
+            "timeout": 3600
+          }
+        ]
+      }
+    ],
+    "session:start": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${GLOOTIE_ROOT}/session-start-hook.js",
+            "timeout": 10000
+          }
+        ]
+      }
+    ],
+    "prompt:submit": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${GLOOTIE_ROOT}/prompt-submit-hook.js",
+            "timeout": 3600
+          }
+        ]
+      }
+    ],
+    "session:end": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${GLOOTIE_ROOT}/stop-hook.js",
+            "timeout": 300000
+          },
+          {
+            "type": "command",
+            "command": "node ${GLOOTIE_ROOT}/stop-hook-git.js",
+            "timeout": 60000
+          }
+        ]
+      }
+    ]
+  }
+}
